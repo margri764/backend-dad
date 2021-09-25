@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require ('cors');
-// const { dbConnection } = require('../db/config.db');
+const { dbConnection } = require('../db/config.db');
 const fileUpload = require('express-fileupload');
 
 class Server{
@@ -8,14 +8,14 @@ class Server{
         constructor(){
             this.app = express();
             this.port = process.env.PORT;
-            // this.conectarDB();
+            this.conectarDB();
             this.middlewares();
             this.routes();
             
         }
 
     async conectarDB() {
-        await dbConnection();
+         await dbConnection();
     }
     
     middlewares(){
@@ -31,13 +31,16 @@ class Server{
     }    
 
     routes(){
-        this.app.use('/send-mail', require('../routes/email-routes'));
-        this.app.use('/order-note', require('../routes/orderNote-routes'));
+        this.app.use('/send-mail', require('../routes/email.routes'));
+        this.app.use('/order-note', require('../routes/orderNote.routes'));
+        this.app.use('/api/categories', require('../routes/category.routes'));   
+        this.app.use('/api/products', require('../routes/product.routes'));   
+        this.app.use('/api/users', require('../routes/user.routes'));
+        this.app.use('/api/auth', require('../routes/auth.routes')); 
 
-        // this.app.use('/api/auth', require('../routes/auth.routes'));
-        // this.app.use('/api/users', require('../routes/user.routes'));
-        // this.app.use('/api/categories', require('../routes/category.routes'));   
-        // this.app.use('/api/products', require('../routes/product.routes'));   
+        //prueba
+        this.app.use('/api/thumbnail-upload', require('../routes/prueba.routes'));   
+
         // this.app.use('/api/search', require('../routes/search.routes'));   
         // this.app.use('/api/uploads', require('../routes/uploads.routes'));              
     }
