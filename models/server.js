@@ -40,7 +40,7 @@ class Server{
         this.app.use('/api/auth', require('../routes/auth.routes')); 
 
         this.app.get('*', (req, res) => { 
-        res.senFile( path.resolve(__dirname,'public/index.html'))
+        res.sendFile( path.resolve(__dirname,'public/index.html'))
         });
 
         //prueba
