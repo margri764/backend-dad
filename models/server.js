@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require ('cors');
+const path = require ('path');
 const { dbConnection } = require('../db/config.db');
 const fileUpload = require('express-fileupload');
 
@@ -37,6 +38,10 @@ class Server{
         this.app.use('/api/products', require('../routes/product.routes'));   
         this.app.use('/api/users', require('../routes/user.routes'));
         this.app.use('/api/auth', require('../routes/auth.routes')); 
+
+        this.app.get('*', (req, res) => { 
+        res.senFile( path.resolve(__dirname,'public/index.html'))
+        });
 
         //prueba
         this.app.use('/api/thumbnail-upload', require('../routes/prueba.routes'));   

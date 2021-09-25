@@ -76,7 +76,9 @@ const getProduct = async (req,res)=>{
 
     const { limit } = req.query;
     // const { limit , desde }=req.query;
-  
+  try {
+      
+
     const [ total, product ] = await Promise.all([
 
         Product.countDocuments( {state:true} ),
@@ -92,6 +94,12 @@ const getProduct = async (req,res)=>{
         product
 
     });
+} catch (error) {
+    res.status(501).json({
+        msg: 'base de datos no operativa'
+    })  
+      
+}
 }
 
 // const getProductById = async ( req, res ) =>{
