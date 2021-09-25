@@ -44,7 +44,7 @@ class Server{
         });
 
         //prueba
-        this.app.use('/api/thumbnail-upload', require('../routes/prueba.routes'));   
+        // this.app.use('/api/thumbnail-upload', require('../routes/prueba.routes'));   
 
         // this.app.use('/api/search', require('../routes/search.routes'));   
         // this.app.use('/api/uploads', require('../routes/uploads.routes'));              
