@@ -74,11 +74,10 @@ const onFileupload = (req, res) => {
 
 const getProduct = async (req,res)=>{
 
-    const { limit=1 }=req.query;
+    const { limit } = req.query;
     // const { limit , desde }=req.query;
   
-
-    const [ total, product ]  = await Promise.all([
+    const [ total, product ] = await Promise.all([
 
         Product.countDocuments( {state:true} ),
         Product.find( {state:true} )
