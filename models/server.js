@@ -22,7 +22,7 @@ class Server{
     middlewares(){
         this.app.use(cors());
         this.app.use (express.json());
-        this.app.use(express.static('public'));
+        this.app.use(express.static('../public'));
         this.app.use(fileUpload({
             useTempFiles : true,
             tempFileDir : '/tmp/',
@@ -40,7 +40,7 @@ class Server{
         this.app.use('/api/auth', require('../routes/auth.routes')); 
 
         this.app.get('*', (req, res) => { 
-        res.sendFile( path.resolve(__dirname,'../public/index.html'))
+        res.sendFile( path.resolve( __dirname,'../public/index.html') )
         });
 
         //prueba
