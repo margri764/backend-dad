@@ -7,4 +7,4 @@ router.post('/', email)
 
 
 
-module.exports=router;
+module.exports = router;

@@ -5,7 +5,6 @@ const nodemailer = require("nodemailer");
 const email  = async( req, res, next) => {  
    
     const { name, email, phone, message } = req.body;
-    console.log(name)
 
     const contentHtml=`
     
