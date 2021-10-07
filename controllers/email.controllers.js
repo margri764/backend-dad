@@ -71,4 +71,4 @@ sendMail()
 .catch(error =>  next(error))
 };
 
-module.exports = { email };
+module.exports = email ;
