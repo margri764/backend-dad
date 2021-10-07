@@ -6,30 +6,44 @@ const orderNote  = async( req, res, next) => {
     
     let dataArrayReq=[];
  
-    dataArrayReq=req.body;
-    // console.log(dataArrayReq)
+    dataArrayReq = req.body;
+    const { buy } = req.query
       
     let contentHtml="";
     let tabla="";
     let data="";
-    for (const prod of dataArrayReq){
+    let source="";
 
-       data =  `<tr> ${prod.name} </tr>
-                <tr> ${prod.email} </tr>
-                <tr> ${prod.phone} </tr>
+    for ( const prod of dataArrayReq ){
+      
+         buy === 'undefined' ? source= 'NOTA DE PEDIDO' : source= 'MERCADO PAGO'; 
+      
+      
+      // return (region === this.regionActiva) 
+      // ? 'btn btn-primary'
+      // : 'btn btn-outline-primary';
+
+
+       data =  `
+                <tr> ${ source } </tr>
+                <tr> ${ prod.name } </tr>
+                <tr> ${ prod.email } </tr>
+                <tr> ${ prod.phone } </tr>
                 `
         
        tabla+=    
         `           
            <tr> 
                        
-             <td> ${prod.title}       </td>
-             <td> ${  prod.quantity}  </td>
-             <td> ${prod.unit_price}  </td>
-             <td> ${prod.unit_price * prod.quantity} </td>      
+             <td> ${ prod.title }       </td>
+             <td> ${ prod.quantity }  </td>
+             <td> ${ prod.unit_price }  </td>
+             <td> ${ prod.unit_price * prod.quantity } </td>      
            </tr>           
          `;
       }
+
+  
 
       contentHtml=`
       <h3> Datos del cliente</h3>
@@ -52,7 +66,7 @@ const orderNote  = async( req, res, next) => {
 
       `
 
-
+          
 
 
 const CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
@@ -107,7 +121,6 @@ sendMail()
 .catch(error =>  next(error))
 };
 
-// res.json({msg: "mensaje enviado con exito"})
-// };
 
-module.exports = orderNote;
+
+module.exports = { orderNote };
