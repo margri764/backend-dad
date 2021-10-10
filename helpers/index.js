@@ -10,5 +10,5 @@ module.exports={
     ...dbValidators,
     ...generarJwt,
     ...googleVerify,
-    ...uploadFiles
+    ...uploadFiles,
 }

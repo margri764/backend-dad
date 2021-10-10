@@ -3,7 +3,8 @@
 const upFilesFront = (file) =>{ 
 
     return new Promise ( ( resolve, reject ) => { 
-    
+
+      
         const sliceName = file.split('.');
         const extension = sliceName[sliceName.length-1];
 

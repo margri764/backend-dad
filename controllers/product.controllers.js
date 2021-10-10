@@ -5,6 +5,10 @@ const cloudinary= require ('cloudinary').v2;
 cloudinary.config( process.env.CLOUDINARY_URL);
 
 
+
+
+
+
 const createProduct =  async (req, res) => { 
  
 
@@ -18,14 +22,15 @@ const createProduct =  async (req, res) => {
          });
          }
          
+
  
         const {name, category, ...body } = req.body;
         const nameImg = req.files.imagen;
-        
+
         
          await upFilesFront( nameImg.name );
 
-        const { tempFilePath } = req.files.imagen;
+        const { tempFilePath } = req.files.imagen;        
            
 
         const productDB = await Product.findOne({name:name.toUpperCase()}); //no me deja solo name
@@ -74,7 +79,7 @@ const onFileupload = (req, res) => {
 
 const getProduct = async (req,res)=>{
 
-    const { limit } = req.query;
+    const { amountDocs } = req.query;
     // const { limit , desde }=req.query;
   try {
       
@@ -85,8 +90,8 @@ const getProduct = async (req,res)=>{
         Product.find( {state:true} )
     //         // .populate('usuario','name')
     //         // .populate('category','name')
-    //         // .skip( Number (desde))
-            .limit( Number (limit))
+            .skip( Number (amountDocs))
+            .limit(8)
     ]);
    
     res.status(200).json({ 
