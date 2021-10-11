@@ -79,7 +79,7 @@ const onFileupload = (req, res) => {
 
 const getProduct = async (req,res)=>{
 
-    const { amountDocs } = req.query;
+    const { quantityDocs } = req.query;
     // const { limit , desde }=req.query;
   try {
       
@@ -90,7 +90,7 @@ const getProduct = async (req,res)=>{
         Product.find( {state:true} )
     //         // .populate('usuario','name')
     //         // .populate('category','name')
-            .skip( Number (amountDocs))
+            .skip( Number (quantityDocs))
             .limit(8)
     ]);
    
