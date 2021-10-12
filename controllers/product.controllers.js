@@ -80,6 +80,8 @@ const onFileupload = (req, res) => {
 const getProduct = async (req,res)=>{
 
     const { quantityDocs } = req.query;
+    console.log( quantityDocs)
+
     // const { limit , desde }=req.query;
   try {
       
