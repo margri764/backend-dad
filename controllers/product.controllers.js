@@ -1,6 +1,7 @@
 
 const { upFilesFront } = require('../helpers/upload-files');
 const Product = require ('../models/product');
+const Category = require ('../models/category');
 const cloudinary= require ('cloudinary').v2;
 cloudinary.config( process.env.CLOUDINARY_URL);
 
@@ -60,7 +61,7 @@ const createProduct =  async (req, res) => {
             res.status(201).json({product})   
 
         } catch (error) {
-            res.status(400).json({error});
+            res.status(400).json( {error} );
         }   
 }
 
@@ -79,21 +80,21 @@ const onFileupload = (req, res) => {
 
 const getProduct = async (req,res)=>{
 
-    const { quantityDocs } = req.query;
-    console.log( quantityDocs)
+    const quantityDocs  = Number (req.query.quantityDocs) || 0;
 
-    // const { limit , desde }=req.query;
   try {
       
 
     const [ total, product ] = await Promise.all([
 
         Product.countDocuments( {state:true} ),
-        Product.find( {state:true} )
+        Product
+             .find( {state:true} )
+         
     //         // .populate('usuario','name')
     //         // .populate('category','name')
-            .skip( Number (quantityDocs))
-            .limit(8)
+            .skip( quantityDocs)
+            .limit(4)
     ]);
    
     res.status(200).json({ 
@@ -107,6 +108,54 @@ const getProduct = async (req,res)=>{
     })  
       
 }
+}
+
+const getProductSearch = async ( req, res) =>{
+    
+    const nameFromFront = req.query.nameItem;
+    // const nameSplit = nameFromFront.split(' ');
+    // const nameToSearch = nameSplit[0];
+ 
+    try {
+        // const productDB = await Product.findOne({name:name.toUpperCase()});
+        // const [ total, product ] = await Promise.all([
+        //     Product.countDocuments( {state:true} ),
+        //     Product
+        //          .find( {state:true} )   
+        //         .skip( quantityDocs)
+        //         .limit(4)
+        // ]);
+        regex = nameFromFront;
+        const [ product ] = await Promise.all([    
+         
+            Product.find ({
+                name:{ 
+                "$regex": regex,
+                // "$options": "is"
+            }})
+         
+           ]);
+
+        //    const arrayItem = [];
+        //    arrayItem.push(product)
+        // console.log("desde",arrayItem)
+
+       
+        res.status(200).json({ 
+           product
+        //    arrayItem
+            // category
+
+    
+        });
+    } catch (error) {
+        res.status(501).json({
+            msg: 'base de datos no operativa'
+        })  
+          
+    }
+
+
 }
 
 // const getProductById = async ( req, res ) =>{
@@ -153,7 +202,8 @@ const getProduct = async (req,res)=>{
 module.exports={
   getProduct,
   createProduct,
-  onFileupload
+  onFileupload,
+  getProductSearch
 //   getProductById,
 //   updateProduct,
 //   deleteProduct
