@@ -94,7 +94,7 @@ const getProduct = async (req,res)=>{
     //         // .populate('usuario','name')
     //         // .populate('category','name')
             .skip( quantityDocs)
-            .limit(4)
+            .limit(16)
     ]);
    
     res.status(200).json({ 
