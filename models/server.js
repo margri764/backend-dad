@@ -20,14 +20,15 @@ class Server{
     }
     
     middlewares(){
+        // this.app.use( "../uploads", express.static(__dirname + "../uploads"));
         this.app.use(cors());
-        this.app.use (express.json());
+        this.app.use(express.json({limit:'50mb'}));
         this.app.use(express.static('public'));
-        this.app.use(fileUpload({
-            useTempFiles : true,
-            tempFileDir : '/tmp/',
-            createParentPath: true
-        })); 
+        // this.app.use(fileUpload({
+        //     useTempFiles : true,
+        //     tempFileDir : '/tmp/',
+        //     createParentPath: true
+        // })); 
 
     }    
 
@@ -41,6 +42,9 @@ class Server{
         this.app.use('/api/users',      require('../routes/user.routes'));
         this.app.use('/api/auth',       require('../routes/auth.routes')); 
         this.app.use('/api/payment',    require('../routes/payment.routes')); 
+
+        this.app.use('/api/contrato',    require('../routes/contrato.routes')); 
+
 
 
         this.app.get('*', (req, res) => { 
