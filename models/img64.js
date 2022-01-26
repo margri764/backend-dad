@@ -3,10 +3,10 @@ const {Schema,model} = require ('mongoose');
 
 const Img64Schema = Schema({
     
-    img : {
-        type: String,
+    img : [{
+        type: Object,
         required: true,
-     },
+     }]
 
 
 });
