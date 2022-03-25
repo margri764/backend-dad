@@ -1,76 +1,96 @@
 
 const fs = require ('fs');
+const { container } = require('googleapis/build/src/apis/container');
 const path = require ('path');
-const dbPath = path.join (__dirname, '../uploads/');
-
-
 const { v4: uuidv4 } = require('uuid');
+
+//crear la carpeta  "uploads" en el raiz. Verificar bien la ruta a la carpeta
+const dbPath = path.join (__dirname, '../uploads/');
 
 const ImgFormat = require ('../models/img64');
 
 
-const representante = async (req, res)=>{
+const contrato = async (req, res)=>{
           
    
-        const { voucher } = req.body; 
-
-        // console.log(voucher)
+        const { voucher, ...body } = req.body; 
+    //   console.log(req.body);
 
         let voucherJpg;
-        let voucherRandom;
+        let voucherNuevoNombreRandom;
         let voucherSlice;
-        let arrImg = [];
-        let arrImgT = [];
+        let arregloImg = [];
+        let arregloImgT = [];
+        let voucherValidator=[];
+        let noImage;
 
-        // AGREGAR CONDICIONAL PARA EL MAP VACIO !!
         
+        if(voucher === null ){
+
+            console.log('se debe incluir un voucher')
+       
+            return res.status(500).json({msg: 'se debe incluir un voucher'})
+
+        };
+
         voucher.map( item => (
             item = item.toString(),
-            // console.log(item),
-            voucherJpg = item.slice(22),
-            voucherSlice = voucherJpg,
-             voucherJpg = uuidv4() + '.jpg',
-             voucherRandom = voucherJpg,      
-            arrImg.push(voucherRandom),
-            arrImgT.push(voucherSlice)
-
+           voucherValidator.push( item.slice(0,11) )
         ))
+
+        noImage = voucherValidator.filter(item => item !== "data:image/");
+
+
+        if(noImage != []){
+            console.log('solo se permiten img')
+            return res.status(500).json({msg: 'solo se permiten imagenes'})
+        } else {
+      
+            voucher.map( item => (
+                item = item.toString(),
+                voucherJpg = item.slice(22),
+                voucherSlice = voucherJpg,
+                voucherJpg = uuidv4() + '.jpg',
+                voucherNuevoNombreRandom = voucherJpg,      
+                arregloImg.push(voucherNuevoNombreRandom),
+                arregloImgT.push(voucherSlice)
+        ))
+        }
        
 
    
         try {
 
                
-            let item3;
-            let item4;
+            let pathRandom;
+            let fileSliceBase64;
             let arrToSaveInDb = [];
 
-            for (var i = 0; i < arrImg.length; i++) {
+            for (var i = 0; i < arregloImg.length; i++) {
 
-                    item3 = arrImg[i],
-                    item4 = arrImgT[i];
-                    fs.writeFileSync(dbPath + item3, item4,'base64')
-                    arrToSaveInDb.push( dbPath + item3 )
+                    pathRandom = arregloImg[i],
+                    fileSliceBase64 = arregloImgT[i];
+                    fs.writeFileSync(dbPath + pathRandom, fileSliceBase64,'base64')
+                    arrToSaveInDb.push( dbPath + pathRandom )
                
              }
 
                   
          
            
-          img = {
-              img: arrToSaveInDb
+          const dataToDb = {
+              ...body,
+              voucher: arrToSaveInDb
           }  
 
-          const imgToSave = ImgFormat(img)  
+          const imgToSave = new ImgFormat(dataToDb)  
 
           await imgToSave.save() 
-          res.status(200).json({img})
+             res.status(200).json({dataToDb})
 
             
         } catch (error) {
-// OJO MIRAR EL ERROR DE TOO LONG
 
-            console.log(error)
             res.send(error)
         }    
        
@@ -78,4 +98,4 @@ const representante = async (req, res)=>{
 
 }
 
-module.exports = { representante }
+module.exports = { contrato }

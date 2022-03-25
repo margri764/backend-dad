@@ -3,18 +3,13 @@ const {Schema,model} = require ('mongoose');
 
 const Img64Schema = Schema({
     
-    img : [{
+     voucher: [{
         type: Object,
         required: true,
-     }]
+     }],
 
-
+  
 });
 
-// CategorySchema.methods.toJSON = function(){
-//     const {__v, state, ...data} = this.toObject();
-    
-//     return data; 
-// }
 
 module.exports= model ('ImgFormat', Img64Schema);
