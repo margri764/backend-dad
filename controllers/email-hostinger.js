@@ -1,6 +1,7 @@
 const nodemailer = require('nodemailer');
 
 const mail = {
+          
     user: 'ubaldolopez@revimackagro.com',
     pass: '#bulRevimack18'
 }
@@ -8,6 +9,8 @@ const mail = {
 const email  = async( req, res, next) => {  
    
     const { name, email, phone, message } = req.body;
+
+  
 
     const contentHtml=`
     
