@@ -45,7 +45,6 @@ const contrato = async (req, res)=>{
             console.log('solo se permiten img')
             return res.status(500).json({msg: 'solo se permiten imagenes'})
         } else {
-      
             voucher.map( item => (
                 item = item.toString(),
                 voucherJpg = item.slice(22),
