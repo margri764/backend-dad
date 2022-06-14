@@ -1,16 +1,11 @@
 const nodemailer = require('nodemailer');
 
-// const mail = {
-          
-//     user: 'ubaldolopez@revimackagro.com',
-//     pass: '#bulRevimack18'
-// }
-
 const mail = {
           
-  user: 'margri764@feintdevs.com',
-  pass: 'bulFeintdevs18#'
+    user: 'ubaldolopez@revimackagro.com',
+    pass: '#bulRevimack18'
 }
+
 
 
 
