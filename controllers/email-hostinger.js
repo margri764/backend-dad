@@ -12,6 +12,8 @@ const mail = {
   pass: 'bulFeintdevs18#'
 }
 
+
+
 const email  = async( req, res, next) => {  
    
     const { name, email, phone, message } = req.body;
