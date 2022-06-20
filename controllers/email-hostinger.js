@@ -48,7 +48,7 @@ async function sendMail(){
       
 
         const mailOptions = {
-            // from: "Formulario de contacto Revimack Agro <ubaldolopez@revimackagro.com>",
+             from: "ubaldolopez@revimackagro.com",
               to: mail.user,
               subject: "Consulta-Contacto",
               html: contentHtml,
