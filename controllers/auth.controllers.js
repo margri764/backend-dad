@@ -11,6 +11,7 @@ const { generarJWT, googleVerify } = require('../helpers');
 const login = async (req, res=response)=>{
 
     const {email, password, name} = req.body;
+    console.log("login:", req.body)
 
    try {
         const user = await User.findOne({email});

@@ -24,9 +24,8 @@ const usersGet = async (req,res=response)=>{
 const usersPost= async (req, res = response) => {
     
  
-
     const { name, email, password }= req.body
-    // console.log(req.body)
+    console.log(req.body)
     
     const user = new User ({email, password, name});
     
