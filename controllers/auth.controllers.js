@@ -10,7 +10,7 @@ const { generarJWT, googleVerify } = require('../helpers');
 
 const login = async (req, res=response)=>{
 
-    const {email, password, name} = req.body;
+    const {email, password} = req.body;
     console.log("login:", req.body)
 
    try {
@@ -31,11 +31,11 @@ const login = async (req, res=response)=>{
         const token = await generarJWT(user.id);
 
         res.json({
-                ok: true,
+                // ok: true,
                 uid: user.id, 
                 name: user.name,
                 email: user.email,
-                token
+                // token
 
         })
    } catch (error) {

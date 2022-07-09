@@ -2,7 +2,7 @@ const nodemailer = require('nodemailer');
 
 const mail = {
           
-    user: 'ubaldolopez@revimackagro.com',
+    user: 'ventas@revimackagro.com',
     pass: '#bulRevimack18'
 }
 
