@@ -49,7 +49,7 @@ async function sendMail(){
       
 
         const mailOptions = {
-             from: "Revimack Agro <ubaldolopez@revimackagro.com>",
+             from: "Revimack Agro <ventas@revimackagro.com>",
               to: mail.user,
               subject: "Consulta-Contacto",
               html: contentHtml,
