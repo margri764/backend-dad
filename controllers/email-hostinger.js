@@ -52,6 +52,7 @@ async function sendMail(){
              from: "Revimack Agro <ventas@revimackagro.com>",
               to: mail.user,
               subject: "Consulta-Contacto",
+              text:"Este es un email de verificación y contacto",
               html: contentHtml,
           };
         
