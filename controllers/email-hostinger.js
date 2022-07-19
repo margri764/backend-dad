@@ -2,7 +2,7 @@ const nodemailer = require('nodemailer');
 
 const mail = {
           
-    user: 'ventas@revimackagro.com',
+    user: 'contacto@revimackagro.com',
     pass: '#bulRevimack18'
 }
 
@@ -49,7 +49,7 @@ async function sendMail(){
       
 
         const mailOptions = {
-             from: "Revimack Agro <ventas@revimackagro.com>",
+             from: "Revimack Agro <contacto@revimackagro.com>",
               to: mail.user,
               subject: "Consulta-Contacto",
               text:"Este es un email de verificación y contacto",
